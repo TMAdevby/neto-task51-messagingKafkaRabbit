@@ -97,39 +97,39 @@ services:
       timeout: 10s
       retries: 5
 
-  credit-api-service:
-    build: ./credit-api-service
-    container_name: credit-api-service
-    ports:
-      - "8080:8080"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-api:5432/credit_api
-      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
-      SPRING_RABBITMQ_HOST: rabbitmq
-    depends_on:
-      postgres-api:
-        condition: service_healthy
-      kafka:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
-    networks:
-      - messaging-network
-
-
-  credit-processing-service:
-    build: ./credit-processing-service
-    container_name: credit-processing-service
-    environment:
-      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
-      SPRING_RABBITMQ_HOST: rabbitmq
-    depends_on:
-      kafka:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
-    networks:
-      - messaging-network
+#  credit-api-service:
+#    build: ./credit-api-service
+#    container_name: credit-api-service
+#    ports:
+#      - "8080:8080"
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-api:5432/credit_api
+#      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+#      SPRING_RABBITMQ_HOST: rabbitmq
+#    depends_on:
+#      postgres-api:
+#        condition: service_healthy
+#      kafka:
+#        condition: service_healthy
+#      rabbitmq:
+#        condition: service_healthy
+#    networks:
+#      - messaging-network
+#
+#
+#  credit-processing-service:
+#    build: ./credit-processing-service
+#    container_name: credit-processing-service
+#    environment:
+#      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+#      SPRING_RABBITMQ_HOST: rabbitmq
+#    depends_on:
+#      kafka:
+#        condition: service_healthy
+#      rabbitmq:
+#        condition: service_healthy
+#    networks:
+#      - messaging-network
 
 
 networks:
